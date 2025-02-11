@@ -16,7 +16,7 @@ def print_report():
 # App Loop
 machine_on = True
 while machine_on:
-    user_input = input("What would you like? (espresso/latte/cappuccino) ")
+    user_input = input("\nWhat would you like? (espresso/latte/cappuccino) ").lower()
 
     # Detected turn off trigger
     if user_input == "off":
@@ -25,3 +25,19 @@ while machine_on:
     # Detected report trigger
     elif user_input == "report":
         print_report() 
+
+    # User asked for an espresso
+    elif user_input == "espresso":
+        print(f"User selected espresso")
+
+    # User asked for a latte
+    elif user_input == "latte":
+        print(f"User selected latter")
+    
+    # User asked for a cappuccino
+    elif user_input == "cappuccino":
+        print(f"User selected cappuccino")
+
+    # Option not recognized
+    else:
+        print(f"Option not recognized. Please enter a valid option.")
