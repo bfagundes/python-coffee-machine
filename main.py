@@ -14,7 +14,7 @@ def print_report():
     print(f"- Money: ${money_balance}")
 
 def prepare_coffee(drink):
-    print(f"An {drink} costs ${round(MENU[drink]["cost"],2)}. Please insert coins.")
+    print(f"An {drink} costs ${ MENU[drink]["cost"]:.2f }. Please insert coins.")
 
 # App Loop
 machine_on = True
