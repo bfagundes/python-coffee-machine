@@ -7,14 +7,36 @@ def turn_off():
     exit(0)
 
 def print_report():
-    print(f"Coffee Machine Resource Report:")
+    print(f"Coffee Machine Report:")
     print(f"- Water: {resources["water"]}ml")
     print(f"- Milk: {resources["milk"]}ml")
     print(f"- Coffee: {resources["coffee"]}g")
-    print(f"- Money: ${money_balance}")
+    print(f"- Money: ${money_balance:.2f}")
 
-def prepare_coffee(drink):
-    print(f"An {drink} costs ${ MENU[drink]["cost"]:.2f }. Please insert coins.")
+def receive_coins():
+    quarters = int(input("How many quarters? "))
+    dimes = int(input("How many dimes? "))
+    nickels = int(input("How many nickels? "))
+    pennies = int(input("How many pennies? "))
+    total_coins = quarters*0.25 + dimes*0.1 + nickels*0.05 + pennies*0.01
+    return total_coins
+
+def receive_order(drink):
+    # Dealing with the payment
+    drink_cost = MENU[drink]["cost"]
+    print(f"The {drink} costs ${drink_cost:.2f}. Please insert coins.")
+    user_payment = receive_coins()
+    
+    if user_payment < drink_cost:
+        print("Sorry that's not enough money. Money refunded.")
+        return
+    
+    elif user_payment > drink_cost:
+        user_refund = user_payment - drink_cost
+        print(f"Here is ${user_refund:.2f} dollars in change.")
+
+    global money_balance
+    money_balance += drink_cost
 
 # App Loop
 machine_on = True
@@ -31,7 +53,7 @@ while machine_on:
 
     # Detected a valid drink order
     elif user_input in ("espresso", "latte", "cappuccino"):
-        prepare_coffee(user_input)
+        receive_order(user_input)
 
     # Option not recognized
     else:
