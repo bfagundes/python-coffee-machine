@@ -2,6 +2,7 @@
 
 # Coffee Machine Program Requirements
 Requirements for this Python exercise.
+* Feel free to include other features to the project, like refilling the resources*
 
 ## Resources
 ### Basic Resources
