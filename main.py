@@ -21,6 +21,20 @@ def receive_coins():
     total_coins = quarters*0.25 + dimes*0.1 + nickels*0.05 + pennies*0.01
     return total_coins
 
+def prepare_coffee(drink):
+    # Check if there's sufficient resources
+    for ingredient, amount in MENU[drink]["ingredients"].items():
+        if resources[ingredient] < amount:
+            print(f"Sorry we're out of {ingredient}. Please select another drink.")
+            print("Money refunded..")
+            return
+
+    # Deduce the amount of ingredients used
+    for ingredient, amount in MENU[drink]["ingredients"].items():
+        resources[ingredient] -= amount
+
+    print(f"Here is your {drink}. Enjoy!")
+
 def receive_order(drink):
     # Dealing with the payment
     drink_cost = MENU[drink]["cost"]
@@ -28,7 +42,8 @@ def receive_order(drink):
     user_payment = receive_coins()
     
     if user_payment < drink_cost:
-        print("Sorry that's not enough money. Money refunded.")
+        print("Sorry that's not enough money.")
+        print("Money refunded..")
         return
     
     elif user_payment > drink_cost:
@@ -37,6 +52,8 @@ def receive_order(drink):
 
     global money_balance
     money_balance += drink_cost
+
+    prepare_coffee(drink)
 
 # App Loop
 machine_on = True
