@@ -13,6 +13,9 @@ def print_report():
     print(f"- Coffee: {resources["coffee"]}g")
     print(f"- Money: ${money_balance}")
 
+def prepare_coffee(drink):
+    print(f"An {drink} costs ${round(MENU[drink]["cost"],2)}. Please insert coins.")
+
 # App Loop
 machine_on = True
 while machine_on:
@@ -26,17 +29,9 @@ while machine_on:
     elif user_input == "report":
         print_report() 
 
-    # User asked for an espresso
-    elif user_input == "espresso":
-        print(f"User selected espresso")
-
-    # User asked for a latte
-    elif user_input == "latte":
-        print(f"User selected latter")
-    
-    # User asked for a cappuccino
-    elif user_input == "cappuccino":
-        print(f"User selected cappuccino")
+    # Detected a valid drink order
+    elif user_input in ("espresso", "latte", "cappuccino"):
+        prepare_coffee(user_input)
 
     # Option not recognized
     else:
